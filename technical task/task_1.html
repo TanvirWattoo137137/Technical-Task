@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Task 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .box {
+            padding: 40px;
+            border: 4px solid #f4f4f4;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .column {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            gap: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .icon {
+            background-color: #d0d6f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+        }
+
+        .item .content {
+            background-color: #ffffff;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .item span {
+            margin-left: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .item small {
+            margin-left: 5px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .item .icon button {
+            padding: 0;
+            border: none;
+            background: none;
+        }
+
+        button {
+            background-color: #f7f7f7;
+            color: #007bff;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 5px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .add-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .add-box i {
+            margin-right: 5px;
+        }
+
+        .add-box:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="column" id="column-1">
+            <p style="margin-bottom: 100px; margin-right: 20px;">Number of items: 4</p>
+            <div class="item" id="item1" draggable="true">
+                <div class="icon">
+                    <button class="add-item"><img src="/images/Add.png" alt="Add" width="70%" style="margin-top: 5px;"></button>
+                </div>
+                <div class="content">
+                    <span>item1</span><br>
+                    <small>category1</small>
+                </div>
+            </div>
+            <div class="item" id="item2" draggable="true">
+                <div class="icon">
+                    <button class="add-item"><img src="/images/Add.png" alt="Add" width="70%" style="margin-top: 5px;"></button>
+                </div>
+                <div class="content">
+                    <span>item2</span><br>
+                    <small>category1</small>
+                </div>
+            </div>
+            <div class="item" id="item3" draggable="true">
+                <div class="icon">
+                    <button class="add-item"><img src="/images/Add.png" alt="Add" width="70%" style="margin-top: 5px;"></button>
+                </div>
+                <div class="content">
+                    <span>item3</span><br>
+                    <small>category1</small>
+                </div>
+            </div>
+            <div class="item" id="item4" draggable="true">
+                <div class="icon">
+                    <button class="add-item"><img src="/images/Add.png" alt="Add" width="70%" style="margin-top: 5px;"></button>
+                </div>
+                <div class="content">
+                    <span>item4</span><br>
+                    <small>category2</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Focus Column -->
+        <div class="column" id="column-2" style="background-color: #fff;">
+            <p>Focus column</p>
+            <div class="box" id="box-1" >
+               <div style="padding: 0; margin-top: -32px; display: flex; justify-content: flex-start; " >
+                 <i class="fa-solid fa-chevron-right move-to-column-3" style="width: 15%; color: #0056b3; margin-left: -30px;"></i>
+                Box Name 1
+            </div>
+                <div style="margin-top: 80px;" ondragover="dragOver(event)" ondrop="drop(event)">
+                    <div class="item" id="item7" draggable="true">
+                        <div class="icon" style="background-color: pink;">
+                            <button class="delete-item"><img src="/images/delete.png" alt="Delete" width="70%" style="margin-top: 5px;"></button>
+                        </div>
+                        <div class="content">
+                            <span>item7</span><br>
+                            <small>category2</small>
+                        </div>
+                    </div>
+                    <div class="item" id="item8" draggable="true">
+                        <div class="icon" style="background-color: pink;">
+                            <button class="delete-item"><img src="/images/delete.png" alt="Delete" width="70%" style="margin-top: 5px;"></button>
+                        </div>
+                        <div class="content">
+                            <span>item8</span><br>
+                            <small>category1</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column" id="column-3">
+            <p style="margin-top: 40px;">Number of boxes: 2</p>
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="add-box" style="margin-right: 2px;">
+                    <i class="fa-solid fa-square-plus" style="font-size: 1em; background-color: #007bff; text-align: center;"></i>
+                </button>
+                <small style="margin-top: 30px;">Add Box</small>
+            </div>
+            <div class="box" id="box-2" style="background-color: #fff;" ondragover="dragOver(event)" ondrop="drop(event)">
+                <div style="display: flex; justify-content: space-between; position: relative; top: -33px;">
+                    <div style="position: relative; left: -25px;"> <i class="fa-solid fa-chevron-left move-to-column-2" style="width: 20%; color: #0056b3;"></i>
+                    </div>
+                    <div><small>Box Name 2</small></div>
+                   <div style="position: relative; right: -25px;"> 
+                    <button class="delete-box">
+                    <i class="fa-solid fa-square-xmark" style="color: #ec0909; width: 20%;"></i>
+                </button></div>
+                </div>
+                <div style="margin-top: 80px;">
+                    <div class="item" id="item5" draggable="true">
+                        <div class="icon" style="background-color: #f7f7f7;">
+                            <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                        </div>
+                        <div class="content">
+                            <span>item5</span><br>
+                            <small>category1</small>
+                        </div>
+                    </div>
+                    <div class="item" id="item6" draggable="true">
+                        <div class="icon" style="background-color: #f7f7f7;">
+                            <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                        </div>
+                        <div class="content">
+                            <span>item6</span><br>
+                            <small>category2</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" id="box-2" style="background-color: #fff;" ondragover="dragOver(event)" ondrop="drop(event)">
+                <div style="display: flex; justify-content: space-between; position: relative; top: -33px;">
+                    <div style="position: relative; left: -25px;"> <i class="fa-solid fa-chevron-left move-to-column-2" style="width: 20%; color: #0056b3;"></i>
+                    </div>
+                    <div><small>Box Name 2</small></div>
+                   <div style="position: relative; right: -25px;"> 
+                    <button class="delete-box">
+                    <i class="fa-solid fa-square-xmark" style="color: #ec0909; width: 20%;"></i>
+                </button></div>
+                </div>
+                <div style="margin-top: 80px;">
+                    <div class="item" id="item5" draggable="true">
+                        <div class="icon" style="background-color: #f7f7f7;">
+                            <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                        </div>
+                        <div class="content">
+                            <span>item5</span><br>
+                            <small>category1</small>
+                        </div>
+                    </div>
+                    <div class="item" id="item6" draggable="true">
+                        <div class="icon" style="background-color: #f7f7f7;">
+                            <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                        </div>
+                        <div class="content">
+                            <span>item6</span><br>
+                            <small>category2</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    initializeEventListeners();
+});
+
+function initializeEventListeners() {
+    document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('dragstart', dragStart);
+        item.addEventListener('dragend', dragEnd);
+    });
+
+    document.querySelectorAll('.box').forEach(box => {
+        box.addEventListener('dragover', dragOver);
+        box.addEventListener('drop', drop);
+    });
+
+    document.querySelectorAll('.add-item').forEach(button => {
+        button.addEventListener('click', addItem);
+    });
+
+    document.querySelectorAll('.delete-item').forEach(button => {
+        button.addEventListener('click', deleteItem);
+    });
+
+    document.querySelectorAll('.delete-box').forEach(button => {
+        button.addEventListener('click', deleteBox);
+    });
+
+    document.querySelectorAll('.add-box').forEach(button => {
+        button.addEventListener('click', addBox);
+    });
+
+    document.querySelectorAll('.move-to-column-3').forEach(button => {
+        button.addEventListener('click', moveToColumn3);
+    });
+
+    document.querySelectorAll('.move-to-column-2').forEach(button => {
+        button.addEventListener('click', moveToColumn2);
+    });
+
+    const addItemButtons = document.querySelectorAll('#column-1 .icon button');
+    addItemButtons.forEach(button => {
+        button.addEventListener('click', addItemToSecondColumn);
+    });
+}
+
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    e.target.classList.add('dragging');
+    applyStyletoDragItem(e.target);
+}
+
+function dragEnd(e) {
+    e.target.classList.remove('dragging');
+    e.target.style.backgroundColor = '';
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function drop(e) {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/plain');
+    const draggedItem = document.getElementById(data);
+    const targetBox = e.target.closest('.box');
+
+    if (draggedItem && targetBox) {
+        draggedItem.parentNode.removeChild(draggedItem);
+        targetBox.appendChild(draggedItem);
+        draggedItem.style.backgroundColor = 'pink';
+        ensureDeleteFunctionality(draggedItem);
+    }
+}
+
+function addItemToSecondColumn(e) {
+    const firstColumn = document.querySelector('#column-1');
+    const itemToMove = e.target.closest('.item');
+
+    if (itemToMove) {
+        const newItem = itemToMove.cloneNode(true);
+        newItem.id = 'item-' + (document.querySelectorAll('.item').length + 1);
+
+        applyStylesToNewItem(newItem);
+
+        const secondColumn = document.querySelector('#column-2 .box');
+        secondColumn.appendChild(newItem);
+        ensureDeleteFunctionality(newItem);
+        addEventListenersToNewElements(newItem);
+
+        itemToMove.remove();
+    }
+}
+
+function addItem(e) {
+    const item = e.target.closest('.item');
+    const newItem = item.cloneNode(true);
+    const column = document.querySelector('#column-2 .box');
+    newItem.id = 'item-' + (document.querySelectorAll('.item').length + 1);
+
+    applyStylesToNewItem(newItem);
+
+    column.appendChild(newItem);
+    ensureDeleteFunctionality(newItem);
+    addEventListenersToNewElements(newItem);
+}
+
+function deleteItem(e) {
+    const itemToDelete = e.target.closest('.item');
+    if (itemToDelete) {
+        itemToDelete.remove();
+    }
+}
+
+function deleteBox(e) {
+    const box = e.target.closest('.box');
+    const items = box.querySelectorAll('.item');
+    const firstColumn = document.querySelector('#column-1');
+
+    items.forEach(item => {
+        firstColumn.appendChild(item);
+    });
+
+    box.remove();
+}
+
+function addBox(e) {
+    const column = document.querySelector('#column-3');
+    const newBox = document.createElement('div');
+    newBox.className = 'box';
+    newBox.innerHTML = `
+        <div>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <i class="fa-solid fa-chevron-left move-to-column-2" style="width: 20%; color: #0056b3;"></i>
+                </div>
+                <small>New Box</small>
+                <div>
+                    <i class="fa-solid fa-square-xmark delete-box" style="color: #ec0909; width: 20%; cursor: pointer;"></i>
+                </div>
+            </div>
+            <div style="margin-top: 80px;">
+                <div class="item" draggable="true" id="item-new-${Date.now()}">
+                    <div class="icon" style="background-color: #f7f7f7;">
+                        <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                    </div>
+                    <div class="content">   
+                        <span>New item</span><br>
+                        <small>category</small>
+                    </div>
+                </div>
+                <div class="item" draggable="true" id="item-new-${Date.now()}">
+                    <div class="icon" style="background-color: #f7f7f7;">
+                        <img src="/images/like.png" alt="Like" width="70%" style="margin-top: 5px;">
+                    </div>
+                    <div class="content">   
+                        <span>New item</span><br>
+                        <small>category</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    column.appendChild(newBox);
+
+    column.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-box')) {
+            const boxToDelete = e.target.closest('.box');
+            if (boxToDelete) {
+                const items = boxToDelete.querySelectorAll('.item');
+                const firstColumn = document.querySelector('#column-1');
+                items.forEach(item => firstColumn.appendChild(item));
+                boxToDelete.remove();
+            }
+        }
+    });
+
+    addEventListenersToNewElements(newBox);
+}
+
+function moveToColumn3(e) {
+    const box = e.target.closest('.box');
+    const column3 = document.querySelector('#column-3');
+    column3.appendChild(box);
+}
+
+function moveToColumn2(e) {
+    const box = e.target.closest('.box');
+    const column2 = document.querySelector('#column-2');
+    column2.appendChild(box);
+}
+
+function ensureDeleteFunctionality(item) {
+    const iconDiv = item.querySelector('.icon');
+    let deleteButton = item.querySelector('.delete-item');
+
+    if (!deleteButton) {
+        deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-item');
+        deleteButton.innerHTML = '<img src="/images/delete.png" alt="Delete" width="70%" style="margin-top: 5px;">';
+        deleteButton.addEventListener('click', deleteItem);
+        iconDiv.innerHTML = '';
+        iconDiv.appendChild(deleteButton);
+    }
+}
+
+function applyStylesToNewItem(item) {
+    const iconDiv = item.querySelector('.icon');
+    iconDiv.style.backgroundColor = 'pink';
+}
+
+function applyStyletoDragItem(item) {
+    const iconDiv2 = item.querySelector('.icon');
+    iconDiv2.style.backgroundColor = 'pink';
+}
+
+function addEventListenersToNewElements(element) {
+    element.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('dragstart', dragStart);
+        item.addEventListener('dragend', dragEnd);
+    });
+
+    element.querySelectorAll('.delete-item').forEach(button => {
+        button.addEventListener('click', deleteItem);
+    });
+
+    element.querySelectorAll('.move-to-column-2').forEach(button => {
+        button.addEventListener('click', moveToColumn2);
+    });
+
+    element.querySelectorAll('.move-to-column-3').forEach(button => {
+        button.addEventListener('click', moveToColumn3);
+    });
+}
+
+    </script>
+
+</body>
+</html>

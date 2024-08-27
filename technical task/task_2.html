@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+            z-index: 1000;
+            background-color: #F4F4F4; /* Light background for the sidebar */
+            color: black; /* Text color for the sidebar */
+        }
+
+        .main {
+            margin-left: 240px; /* Adjust margin to fit the sidebar */
+            padding: 20px;
+        }
+
+        .table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    margin: 0;
+}
+
+.orders-table th, .orders-table td {
+    padding: 12px 15px;
+    text-align: left;
+    
+}
+
+
+        .logo {
+            font-size: 1.5rem;
+            color: black;
+        }
+
+        .sidebar .nav-link {
+            font-size: 1rem;
+            color: black;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #e0e0e0;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #e0e0e0;
+        }
+
+        .sidebar .fa-icon {
+            margin-left: 10px;
+            color: black; /* Adjusted color for icons */
+        }
+        #custom-header th {
+    color: rgb(214, 206, 206) !important;
+}
+
+
+
+    </style>
+    <style>
+        table th, table td {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: rgb(54, 52, 52);
+
+
+        }
+    
+        table tr {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: rgb(54, 52, 52);
+        }
+    </style>
+    <style>
+        #toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+#toggle-icon.rotate {
+    transform: rotate(90deg);
+}
+    </style>
+    
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="font-family: Arial, Helvetica, sans-serif; font-size: medium; font-weight: bold;">
+                <div class="position-sticky">
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <i class="fab fa-first-order fa-icon" style="margin-left: 15px;"></i>
+                                    <button class="btn btn-toggle align-items-center rounded collapsed" aria-expanded="true">
+                                        <span style="font-size: medium; font-family: Arial, Helvetica, sans-serif;">Catalyst</span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <i id="toggle-icon" class="fa-solid fa-chevron-right" data-bs-toggle="collapse" data-bs-target="#home-collapse"></i>
+                                </div>
+                            </div>
+                            <hr style="width: 119%; margin-left: -10px; color: rgb(214, 206, 206);">
+                            <div class="collapse show" id="home-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="nav-link link-dark rounded"> <i class="fas fa-house fa-icon" style="margin-right: 18px; padding: 5px;"></i>Home</a></li>
+                                    <li><a href="#" class="nav-link link-dark rounded"><i class="fas fa-calendar fa-icon" style="margin-right: 18px; padding: 5px;"></i>Events</a></li>
+                                    <li><a href="#" class="nav-link link-dark rounded"><i class="fab fa-first-order fa-icon" style="margin-right: 18px; padding: 5px;"></i>Orders</a></li>
+                                    <li><a href="#" class="nav-link link-dark rounded"><i class="fas fa-gear fa-icon" style="margin-right: 18px; padding: 5px;"></i>Settings</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+            
+                    <h6 class="px-2" style="font-size: 14px; color: rgb(214, 206, 206); margin-left: 7px;">Upcoming Events</h6>
+                    <ul class="nav flex-column" style="font-size: 8px;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="font-size: 13px;">Bear Hug: Live in Concert</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="font-size: 13px;">Six Fingers — DJ Set</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="font-size: 13px;">We All Look The Same</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="font-size: 13px;">Viking People</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+          
+            
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="table-container mt-1">
+                    <div class="table-header d-flex justify-content-between align-items-center">
+                        <h2 style="font-size: 18px; font-weight: bold;">Orders</h2>
+                        <button class="btn btn-dark create-order">Create Order</button>
+                    </div>
+                    <table class="table table-sm">
+                        <thead id="custom-header" style="color: rgb(214, 206, 206) !important;">
+                            <tr>
+                                <th scope="col">Order number</th>
+                                <th scope="col">Purchase date</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Event</th>
+                                <th scope="col" style="text-align: right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr>
+                                <th scope="row">3000</th>
+                                <td style="color: rgb(214, 206, 206);">May 9, 2024</td>
+                                <td>Leslie Alexander</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            Bear Hug: Live in Concert
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                                <td style="text-align: right;">US$80.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3001</th>
+                                <td style="color: rgb(214, 206, 206);">May 5, 2024</td>
+                                <td>Michael Foster</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            Six Fingers — DJ Set
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                                
+                                <td style="text-align: right;">US$239.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3002</th>
+                                <td style="color: rgb(214, 206, 206);">Apr 28, 2024</td>
+                                <td>Dries Vincent</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            We All Look The Same
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                            
+                                <td style="text-align: right;">US$150.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3003</th>
+                                <td style="color: rgb(214, 206, 206);">Apr 23, 2024</td>
+                                <td>Lindsay Walton</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            Bear Hug: Live in Concert
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                            
+                                <td style="text-align: right;">US$80.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3004</th>
+                                <td style="color: rgb(214, 206, 206);">Apr 18, 2024</th>
+                                <td>Courtney Henry</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            Viking People
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                                <td style="text-align: right;">US$114.99</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3005</th>
+                                <td style="color: rgb(214, 206, 206);">Apr 14, 2024</td>
+                                <td>Tom Cook</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                        <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                            <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                        </div>
+                                        <div>
+                                            Six Fingers — DJ Set
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </td>
+                                <td style="text-align: right;">US$239.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3006</th>
+                            <td style="color: rgb(214, 206, 206);">Apr 10, 2024</td>
+                            <td>Whitney Francis</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        We All Look The Same
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            
+                            <td style="text-align: right;">US$150.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3007</th>
+                            <td style="color: rgb(214, 206, 206);">Apr 6, 2024</td>
+                            <td>Leonard Krosner</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                        
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3008</th>
+                            <td style="color: rgb(214, 206, 206);">Apr 3, 2024</td>
+                            <td>Floyd Miles</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                        
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3009</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 29, 2024</td>
+                            <td>Emily Selman</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Viking People
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            
+                            <td style="text-align: right;">US$114.99</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3010</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 25, 2024</td>
+                            <td>Kristin Watson</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Six Fingers — DJ Set
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            
+                            <td style="text-align: right;">US$239.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3011</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 21, 2024</td>
+                            <td>Emma Dorsey</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3012</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 16, 2024</td>
+                            <td>Alicia Bell</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        We All Look The Same                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                        
+                            <td style="text-align: right;">US$150.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3013</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 12, 2024</td>
+                            <td>Jenny Wilson</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Six Fingers — DJ Set
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                        
+                            <td style="text-align: right;">US$239.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3014</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 8, 2024</td>
+                            <td>Anna Roberts</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3015</th>
+                            <td style="color: rgb(214, 206, 206);">Mar 4, 2024</td>
+                            <td >Benjamin Russell</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        We All Look The Same
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            <td style="text-align: right;">US$150.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3016</th>
+                            <td style="color: rgb(214, 206, 206);">Feb 28, 2024</td>
+                            <td>Jeffrey Webb</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3017</th>
+                            <td style="color: rgb(214, 206, 206);"  >Feb 23, 2024</td>
+                            <td>Kathryn Murphy</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                    <div style="margin-right: 10px; overflow: hidden; border-radius: 50%; width: 25px; height: 25px;">
+                                        <img src="./images/Add_square.png" width="25px" height="25px" style="display: block;">
+                                    </div>
+                                    <div>
+                                        Bear Hug: Live in Concert
+                                    </div>
+                                </div>
+                                
+                                
+                            </td>
+                            
+                            <td style="text-align: right;">US$80.00</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const toggleIcon = document.getElementById('toggle-icon');
+    const collapseElement = document.getElementById('home-collapse');
+
+    
+    collapseElement.addEventListener('shown.bs.collapse', function () {
+        toggleIcon.classList.remove('fa-chevron-right');
+        toggleIcon.classList.add('fa-chevron-down');
+    });
+
+    collapseElement.addEventListener('hidden.bs.collapse', function () {
+        toggleIcon.classList.remove('fa-chevron-down');
+        toggleIcon.classList.add('fa-chevron-right');
+    });
+});
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
